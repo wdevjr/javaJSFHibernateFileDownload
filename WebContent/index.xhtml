@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>warhjr -  Tutorial</title>
+
+	</h:head>
+
+	<h:body>
+	
+<h:messages />
+		<h:form enctype="multipart/form-data" style="width:1000px">
+				<h:panelGrid columns="1">
+
+			<h:inputFile required="true" requiredMessage="Arquivo é obrigatório." 
+				value="#{FileManagedBean.arqu}" />
+			<h:outputLabel value="Descrição:" />
+					<h:inputText required="true" requiredMessage="Descrição é obrigatória." value="#{FileManagedBean.arquivos.descricao}"  style="width : 448px; height : 87px;">
+				    
+				    </h:inputText>
+				<h:commandButton action="#{FileManagedBean.enviar}" value="Salvar">
+				
+				</h:commandButton>
+				</h:panelGrid>
+		</h:form>
+		        <p:messages  severity="info" escape="false" showDetail="true" 
+                 autoUpdate="true" closable="true"/>
+                 
+                 
+      <h:form style="width:800px">
+		<p:dataTable value="#{FileManagedBean.listarArquivos}" var="item" border="1">
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Código" />
+				</f:facet>
+				<h:outputText value="#{item.idarquivo}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Descrição" />
+				</f:facet>
+				<h:outputText value="#{item.descricao}" />
+			</p:column>
+ 			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Nome Arquivo" />
+				</f:facet>
+				<h:outputText value="#{item.nomearquivo}" />
+			</p:column> 
+			<p:column>
+			<f:facet name="header">
+					<h:outputText value="Download" />
+				</f:facet>
+						<h:commandLink value="Selecionar" type="submit" actionListener="#{FileManagedBean.downloadFile}">
+							<f:attribute name="carquivo" value="#{item.nomearquivo}"/>
+						</h:commandLink>
+		 </p:column>
+		</p:dataTable>
+	</h:form>  
+
+	</h:body>
+</html>
